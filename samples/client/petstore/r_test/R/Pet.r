@@ -119,7 +119,7 @@ Pet <- R6::R6Class(
         self$`id`,
         self$`category`$toJSON(),
         self$`name`,
-        lapply(self$`photoUrls`, function(x) paste(paste0('"', x, '"'), sep=",")),
+        paste(jsonlite::toJSON(unlist(self$`photoUrls`))),
         lapply(self$`tags`, function(x) paste(x$toJSON(), sep=",")),
         self$`status`
       )
