@@ -98,13 +98,13 @@
        sprintf(
         '{
            {{#vars}}
-           "{{baseName}}": {{#isListContainer}}[{{/isListContainer}}{{#isPrimitiveType}}{{#isNumeric}}%d{{/isNumeric}}{{^isNumeric}}%s{{/isNumeric}}{{/isPrimitiveType}}{{^isPrimitiveType}}%s{{/isPrimitiveType}}{{#isListContainer}}]{{/isListContainer}}{{#hasMore}},{{/hasMore}}
+           "{{baseName}}": {{#isPrimitiveType}}{{#isNumeric}}%d{{/isNumeric}}{{^isNumeric}}%s{{/isNumeric}}{{/isPrimitiveType}}{{^isPrimitiveType}}%s{{/isPrimitiveType}}{{#hasMore}},{{/hasMore}}
            {{/vars}}
         }',
         {{#vars}}
         {{#isListContainer}}
         {{#isPrimitiveType}}
-        paste(jsonlite::toJSON(self$`{{baseName}}`, auto_unbox=TRUE))){{#hasMore}},{{/hasMore}}
+        paste(jsonlite::toJSON(self$`{{baseName}}`, auto_unbox=TRUE)){{#hasMore}},{{/hasMore}}
         {{/isPrimitiveType}}
         {{^isPrimitiveType}}
         lapply(self$`{{baseName}}`, function(x) paste(x$toJSON(), sep=",")){{#hasMore}},{{/hasMore}}
