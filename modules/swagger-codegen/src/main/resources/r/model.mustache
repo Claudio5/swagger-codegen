@@ -104,7 +104,7 @@
         {{#vars}}
         {{#isListContainer}}
         {{#isPrimitiveType}}
-        paste(jsonlite::toJSON(unlist(self$`{{baseName}}`))){{#hasMore}},{{/hasMore}}
+        paste(jsonlite::toJSON(self$`{{baseName}}`, auto_unbox=TRUE))){{#hasMore}},{{/hasMore}}
         {{/isPrimitiveType}}
         {{^isPrimitiveType}}
         lapply(self$`{{baseName}}`, function(x) paste(x$toJSON(), sep=",")){{#hasMore}},{{/hasMore}}
