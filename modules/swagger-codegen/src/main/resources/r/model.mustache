@@ -95,26 +95,7 @@
       {{/vars}}
     },
     toJSONString = function() {
-       sprintf(
-        '{
-           {{#vars}}
-           "{{baseName}}": {{#isPrimitiveType}}{{#isNumeric}}%d{{/isNumeric}}{{^isNumeric}}%s{{/isNumeric}}{{/isPrimitiveType}}{{^isPrimitiveType}}%s{{/isPrimitiveType}}{{#hasMore}},{{/hasMore}}
-           {{/vars}}
-        }',
-        {{#vars}}
-        {{#isListContainer}}
-        {{#isPrimitiveType}}
-        paste(jsonlite::toJSON(self$`{{baseName}}`, auto_unbox=TRUE)){{#hasMore}},{{/hasMore}}
-        {{/isPrimitiveType}}
-        {{^isPrimitiveType}}
-        lapply(self$`{{baseName}}`, function(x) paste(x$toJSON(), sep=",")){{#hasMore}},{{/hasMore}}
-        {{/isPrimitiveType}}
-        {{/isListContainer}}
-        {{^isListContainer}}
-        self$`{{baseName}}`{{^isPrimitiveType}}$toJSON(){{/isPrimitiveType}}{{#hasMore}},{{/hasMore}}
-        {{/isListContainer}}
-        {{/vars}}
-      )
+      paste(jsonlite::toJSON(self$toJSON(), auto_unbox=TRUE))
     },
     fromJSONString = function({{classname}}Json) {
       {{classname}}Object <- jsonlite::fromJSON({{classname}}Json)
